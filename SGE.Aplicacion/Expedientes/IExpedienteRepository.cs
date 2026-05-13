@@ -6,6 +6,6 @@ namespace SGE.Aplicacion.Expedientes
         void Modificar(Expediente expediente);
         void Eliminar(int expedienteId);
         Expediente? ObtenerPorId(int expedienteId);
-        List<Expediente> ObtenerTodos();
+        IEnumerable<Expediente> ObtenerTodos();
     }
 }

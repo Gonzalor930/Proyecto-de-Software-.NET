@@ -6,6 +6,6 @@ namespace SGE.Aplicacion.Tramites
         void Modificar(Tramite tramite);
         void Eliminar(int tramiteId);
         Tramite? ObtenerPorId(int tramiteId);
-        List<Tramite> ObtenerPorExpedienteId(int expedienteId);
+        IEnumerable<Tramite> ObtenerPorExpedienteId(int expedienteId);
     }
 }
