@@ -1,0 +1,17 @@
+[Bb]in/
+[Oo]bj/
+
+# --- Archivos de Usuario y Configuración Local ---
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+
+# --- Archivos del Sistema Operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Resultados de Tests y Publicación ---
+TestResults/
+publish/
