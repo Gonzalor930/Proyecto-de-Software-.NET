@@ -1,69 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {
-      "SGE.Aplicacion/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "SGE.Dominio": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/SGE.Aplicacion.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SGE.Aplicacion.dll": {}
-        }
-      },
-      "SGE.Dominio/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/SGE.Dominio.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SGE.Dominio.dll": {}
-        }
-      },
-      "SGE.Infraestructura/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "SGE.Aplicacion": "1.0.0",
-          "SGE.Dominio": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/SGE.Infraestructura.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SGE.Infraestructura.dll": {}
-        }
-      }
-    }
+    "net10.0": {}
   },
-  "libraries": {
-    "SGE.Aplicacion/1.0.0": {
-      "type": "project",
-      "path": "../SGE.Aplicacion/SGE.Aplicacion.csproj",
-      "msbuildProject": "../SGE.Aplicacion/SGE.Aplicacion.csproj"
-    },
-    "SGE.Dominio/1.0.0": {
-      "type": "project",
-      "path": "../SGE.Dominio/SGE.Dominio.csproj",
-      "msbuildProject": "../SGE.Dominio/SGE.Dominio.csproj"
-    },
-    "SGE.Infraestructura/1.0.0": {
-      "type": "project",
-      "path": "../SGE.Infraestructura/SGE.Infraestructura.csproj",
-      "msbuildProject": "../SGE.Infraestructura/SGE.Infraestructura.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net10.0": [
-      "SGE.Aplicacion >= 1.0.0",
-      "SGE.Dominio >= 1.0.0",
-      "SGE.Infraestructura >= 1.0.0"
-    ]
+    "net10.0": []
   },
   "packageFolders": {
     "C:\\Users\\Usuario\\.nuget\\packages\\": {}
@@ -71,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Consola\\SGE.Consola.csproj",
-      "projectName": "SGE.Consola",
-      "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Consola\\SGE.Consola.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\Tramites.csproj",
+      "projectName": "Tramites",
+      "projectPath": "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\Tramites.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Consola\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -89,17 +31,7 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {
-            "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
-            },
-            "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj"
-            },
-            "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\SGE.Infraestructura.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\SGE.Infraestructura.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
