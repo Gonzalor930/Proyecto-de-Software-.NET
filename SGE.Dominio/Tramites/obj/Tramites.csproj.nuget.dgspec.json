@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj": {}
+    "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\Tramites.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj": {
+    "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\Tramites.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj",
-        "projectName": "SGE.Dominio",
-        "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\Tramites.csproj",
+        "projectName": "Tramites",
+        "projectPath": "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\Tramites.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\ProyectoNet\\Tramites\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config"

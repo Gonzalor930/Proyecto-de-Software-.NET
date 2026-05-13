@@ -1,26 +1,64 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "SGE.Aplicacion/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "SGE.Dominio": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SGE.Aplicacion.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SGE.Aplicacion.dll": {}
+        }
+      },
+      "SGE.Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/SGE.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SGE.Dominio.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SGE.Aplicacion/1.0.0": {
+      "type": "project",
+      "path": "../SGE.Aplicacion/SGE.Aplicacion.csproj",
+      "msbuildProject": "../SGE.Aplicacion/SGE.Aplicacion.csproj"
+    },
+    "SGE.Dominio/1.0.0": {
+      "type": "project",
+      "path": "../SGE.Dominio/SGE.Dominio.csproj",
+      "msbuildProject": "../SGE.Dominio/SGE.Dominio.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "SGE.Aplicacion >= 1.0.0",
+      "SGE.Dominio >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\gonza\\.nuget\\packages\\": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gonza\\Desktop\\Programacion\\LIC. INFORMATICA\\2DO AÑO\\.NET\\proyecto.net\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\SGE.Infraestructura.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\SGE.Infraestructura.csproj",
       "projectName": "SGE.Infraestructura",
-      "projectPath": "C:\\Users\\gonza\\Desktop\\Programacion\\LIC. INFORMATICA\\2DO AÑO\\.NET\\proyecto.net\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\SGE.Infraestructura.csproj",
-      "packagesPath": "C:\\Users\\gonza\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gonza\\Desktop\\Programacion\\LIC. INFORMATICA\\2DO AÑO\\.NET\\proyecto.net\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\obj\\",
+      "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\SGE.Infraestructura.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Infraestructura\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gonza\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -31,7 +69,14 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+            },
+            "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Proyecto\\Proyecto-de-Software-.NET\\SGE.Dominio\\SGE.Dominio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -65,7 +110,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
