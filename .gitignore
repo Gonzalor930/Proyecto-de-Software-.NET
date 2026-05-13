@@ -1,24 +1,10 @@
-[Bb]in/
-[Oo]bj/
-
-# --- Archivos de Usuario y Configuración Local ---
-.vs/
-.vscode/
-*.user
-*.userosscache
-*.sln.docstates
-# Directorios de compilación
+# Directorios de compilación de .NET
 bin/
 obj/
 
-# Archivos ocultos de Visual Studio / Rider
+# Archivos ocultos de IDEs
 .vs/
+.vscode/
 .idea/
-
-# --- Archivos del Sistema Operativo ---
-.DS_Store
-Thumbs.db
-
-# --- Resultados de Tests y Publicación ---
-TestResults/
-publish/
+*.user
+*.suo
