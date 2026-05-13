@@ -2,10 +2,10 @@ namespace SGE.Aplicacion.Expedientes
 {
     public interface IExpedienteRepository
     {
-        void Agregar(Expediente expediente);
+        void Agregar(Expediesnte expediente);
         void Modificar(Expediente expediente);
-        void Eliminar(int expedienteId);
-        Expediente? ObtenerPorId(int expedienteId);
+        void Eliminar(Guid expedienteId);
+        Expediente? ObtenerPorId(Guid expedienteId);
         IEnumerable<Expediente> ObtenerTodos();
     }
 }
