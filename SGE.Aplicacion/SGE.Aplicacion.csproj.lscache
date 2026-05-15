@@ -62,8 +62,10 @@ Class1.cs
 Expedientes/
  AltaExpedienteUseCase.cs
  BajaExpedienteUseCase.cs
+ CambiarEstadoUseCase.cs
  ExpedienteDTOs.cs
  IExpedienteRepository.cs
+ ModificarCaratulaExpedienteUseCase.cs
 obj/Debug/net10.0/
  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
  SGE.Aplicacion.AssemblyInfo.cs
