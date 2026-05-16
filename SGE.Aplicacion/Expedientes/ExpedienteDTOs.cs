@@ -7,4 +7,15 @@ namespace SGE.Aplicacion.Expedientes{
     public record BajaExpedienteResponse(bool Exito);
     public record ModificarCaratulaExpedienteResponse(bool Exito);
     public record CambiarEstadoExpedienteResponse(bool Exito);
+    public record ListarExpedientesRequest();
+    
+    public record ExpedienteDTO(
+        Guid Id, 
+        string Caratula, 
+        DateTime FechaCreacion, 
+        DateTime FechaUltimaModificacion, 
+        string Estado
+    );
+    
+    public record ListarExpedientesResponse(IEnumerable<ExpedienteDTO> Expedientes);
 }
