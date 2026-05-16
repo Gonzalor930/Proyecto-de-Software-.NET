@@ -10,11 +10,11 @@ public class AltaExpedienteUseCase(IExpedienteRepository repositorio, IAutorizac
         
         if (!autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.ExpedienteAlta))
         {
-            throw new AutorizacionException("No tiene permisos para crear expedientes.");
+            throw new AutorizacionException("No tiene permisos para crear expedientes");
         }
 
-        var caratulaNueva = new Caratula(request.DetalleCaratula);
-        var nuevoExpediente = new Expediente(caratulaNueva, request.IdUsuario);
+        Caratula caratulaNueva = new Caratula(request.DetalleCaratula);
+        Expediente nuevoExpediente = new Expediente(caratulaNueva, request.IdUsuario);
 
         repositorio.Agregar(nuevoExpediente);
 

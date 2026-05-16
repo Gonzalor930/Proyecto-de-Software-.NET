@@ -19,17 +19,17 @@ namespace SGE.Aplicacion.Expedientes
         public void ActualizarEstadoSiEsNecesario(Guid expedienteId, Guid idUsuario)
         {
             //1. Recuperará el expediente 
-            var expediente = _expedienteRepository.ObtenerPorId(expedienteId);
+            Expediente? expediente = _expedienteRepository.ObtenerPorId(expedienteId);
             if (expediente == null)
             {
-                throw new Exception("Expediente no encontrado al intentar actualizar su estado.");
+                throw new Exception("Expediente no encontrado al intentar actualizar su estado");
             }
 
            // 2. Buscará todos sus trámites para determinar cuál es el "último" 
-            var tramites = _tramiteRepository.ObtenerPorExpedienteId(expedienteId);
+            Tramite tramites = _tramiteRepository.ObtenerPorExpedienteId(expedienteId);
 
             // Ordenamos por fecha de creación descendente para obtener el más reciente (el "último")
-            var ultimoTramite = tramites.OrderByDescending(t => t.FechaCreacion).FirstOrDefault();
+            Tramite ultimoTramite = tramites.OrderByDescending(t => t.FechaCreacion).FirstOrDefault();
 
            // 3. Extraerá la etiqueta de dicho trámite. Si no hay trámites, queda en null.
             EtiquetaTramite? ultimaEtiqueta = ultimoTramite?.Etiqueta;
