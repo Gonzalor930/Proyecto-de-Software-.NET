@@ -17,14 +17,12 @@ public class AgregarTramiteUseCase(
             throw new AutorizacionException("No tiene permisos para dar de alta trámites.");
         }
 
-        // 2. Dominio: Tipos explícitos para mayor claridad
         ContenidoTramite contenidoNuevo = new ContenidoTramite(request.Contenido);
         Tramite nuevoTramite = new Tramite(
             request.ExpedienteId, 
             (EtiquetaTramite)request.Etiqueta, 
             contenidoNuevo, 
-            request.IdUsuario
-        );
+            request.IdUsuario);
         tramiteRepositorio.Agregar(nuevoTramite);
 
         // 3.Aca usamos el service que esta en expediente
