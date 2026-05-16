@@ -9,7 +9,7 @@ public class ContenidoTramite
     {
         if (string.IsNullOrWhiteSpace(valor_))
         {
-            throw new Dominioexception("El contenido del tramite no puede estar vacio");
+            throw new DominioException("El contenido del tramite no puede estar vacio");
         }
         Valor=valor_;
     }
