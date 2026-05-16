@@ -6,7 +6,7 @@ namespace SGE.Aplicacion.Tramites;
 public class BajaTramiteUseCase(
     ITramiteRepository tramiteRepositorio, 
     IAutorizacionService autorizacion,
-    ActualizacionEstadoExpedienteService actualizacionService)
+    ActualizacionEstadoExpedienteService Service)
 {
     public BajaTramiteResponse Ejecutar(BajaTramiteRequest request)
     {
@@ -26,7 +26,7 @@ public class BajaTramiteUseCase(
         tramiteRepositorio.Eliminar(request.TramiteId);
 
         // 4. Usamos el ID que nos guardamos, para actualizar
-        actualizacionService.ActualizarEstadoSiEsNecesario(idExpedienteAActualizar, request.IdUsuario);
+        Service.ActualizarEstadoSiEsNecesario(idExpedienteAActualizar, request.IdUsuario);
 
         return new BajaTramiteResponse(true); 
     }

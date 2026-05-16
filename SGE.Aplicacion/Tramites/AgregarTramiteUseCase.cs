@@ -7,7 +7,7 @@ namespace SGE.Aplicacion.Tramites;
 public class AgregarTramiteUseCase(
     ITramiteRepository tramiteRepositorio, 
     IAutorizacionService autorizacion,
-    ActualizacionEstadoExpedienteService actualizacionService)
+    ActualizacionEstadoExpedienteService Service)
 {
     public AgregarTramiteResponse Ejecutar(AgregarTramiteRequest request)
     {
@@ -28,8 +28,8 @@ public class AgregarTramiteUseCase(
         tramiteRepositorio.Agregar(nuevoTramite);
 
         // 3.Aca usamos el service que esta en expediente
-        actualizacionService.ActualizarEstadoSiEsNecesario(request.ExpedienteId, request.IdUsuario);
+        Service.ActualizarEstadoSiEsNecesario(request.ExpedienteId, request.IdUsuario);
 
-        [cite_start]return new AgregarTramiteResponse(nuevoTramite.id);
+        return new AgregarTramiteResponse(nuevoTramite.id);
     }
 }
