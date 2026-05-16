@@ -1,3 +1,4 @@
+using System.Reflection;
 using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Tramites;
 using SGE.Dominio.Expedientes;
@@ -18,20 +19,20 @@ public class BajaExpedienteUseCase(
             throw new AutorizacionException("No tiene permisos para eliminar expedientes.");
         }
 
-        
         Expediente? expediente = repositorio.ObtenerPorId(request.ExpedienteId);
-        if (expediente == null) throw new Exception("El expediente no existe");
         
+        if (expediente == null) throw new EntidadNoEncontradaException("El expediente no existe");
         
-        Tramite tramites = tramiteRepositorio.ObtenerPorExpedienteId(request.ExpedienteId);
+        //Nos devuelve todos los tramites de ese expediente que tenemos que hacer la baja
+        IEnumerable<Tramite> tramites = tramiteRepositorio.ObtenerPorExpedienteId(request.ExpedienteId);
+        
         foreach (var tramite in tramites)
         {
             tramiteRepositorio.Eliminar(tramite.id);
         }
 
-        // 4. Eliminación del expediente
         repositorio.Eliminar(request.ExpedienteId);
         
         return new BajaExpedienteResponse(true);
-    }
+    }   
 }
