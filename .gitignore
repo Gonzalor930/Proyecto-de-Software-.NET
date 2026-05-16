@@ -8,3 +8,5 @@ obj/
 .idea/
 *.user
 *.suo
+# Caché del C# Dev Kit / VS Code
+*.lscache
