@@ -29,10 +29,8 @@ namespace SGE.Aplicacion.Expedientes
                 throw new EntidadNoEncontradaException("Expediente no encontrado al intentar actualizar su estado");
             }
 
-            // CORRECCIÓN: Acá va IEnumerable<Tramite> porque son muchos trámites
             IEnumerable<Tramite> tramites = _tramiteRepository.ObtenerPorExpedienteId(expedienteId);
 
-            // CORRECCIÓN: ultimoTramite puede ser null si la lista está vacía, va con el "?"
             Tramite? ultimoTramite = tramites.OrderByDescending(t => t.FechaCreacion).FirstOrDefault();
 
             EtiquetaTramite? ultimaEtiqueta = ultimoTramite?.Etiqueta;
