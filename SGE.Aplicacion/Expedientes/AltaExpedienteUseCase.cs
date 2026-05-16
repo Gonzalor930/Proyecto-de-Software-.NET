@@ -2,12 +2,18 @@ using SGE.Dominio.Expedientes;
 
 namespace SGE.Aplicacion.Expedientes;
 
-public class AltaExpedienteUseCase(IExpedienteRepository repositorio)
+public class AltaExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)
 {
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
-        var caratulaNueva = new Caratula(request.DetalleCaratula);
-        var nuevoExpediente = new Expediente(caratulaNueva, request.IdUsuario);
+        
+        if (!autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.ExpedienteAlta))
+        {
+            throw new AutorizacionException("No tiene permisos para crear expedientes");
+        }
+
+        Caratula caratulaNueva = new Caratula(request.DetalleCaratula);
+        Expediente nuevoExpediente = new Expediente(caratulaNueva, request.IdUsuario);
 
         repositorio.Agregar(nuevoExpediente);
 
