@@ -1,6 +1,7 @@
 using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Tramites;
 using SGE.Dominio.Expedientes;
+using SGE.Dominio.Tramites;
 
 namespace SGE.Aplicacion.Expedientes;
 
@@ -18,11 +19,11 @@ public class BajaExpedienteUseCase(
         }
 
         
-        var expediente = repositorio.ObtenerPorId(request.ExpedienteId);
-        if (expediente == null) throw new Exception("El expediente no existe.");
+        Expediente? expediente = repositorio.ObtenerPorId(request.ExpedienteId);
+        if (expediente == null) throw new Exception("El expediente no existe");
         
         
-        var tramites = tramiteRepositorio.ObtenerPorExpedienteId(request.ExpedienteId);
+        Tramite tramites = tramiteRepositorio.ObtenerPorExpedienteId(request.ExpedienteId);
         foreach (var tramite in tramites)
         {
             tramiteRepositorio.Eliminar(tramite.id);

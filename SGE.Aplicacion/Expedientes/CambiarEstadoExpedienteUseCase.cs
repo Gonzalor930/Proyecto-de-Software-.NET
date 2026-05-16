@@ -10,11 +10,11 @@ public class CambiarEstadoExpedienteUseCase(IExpedienteRepository repositorio, I
         
         if (!autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.ExpedienteModificacion))
         {
-            throw new AutorizacionException("No tiene permisos para modificar expedientes.");
+            throw new AutorizacionException("No tiene permisos para modificar expedientes");
         }
 
-        var expediente = repositorio.ObtenerPorId(request.ExpedienteId);
-        if (expediente == null) throw new Exception("El expediente no existe.");
+        Expediente? expediente = repositorio.ObtenerPorId(request.ExpedienteId);
+        if (expediente == null) throw new Exception("El expediente no existe");
         
         
         var nuevoEstado = (EstadoExpediente)request.NuevoEstado;
