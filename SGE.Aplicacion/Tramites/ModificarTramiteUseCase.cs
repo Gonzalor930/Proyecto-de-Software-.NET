@@ -17,7 +17,7 @@ public class ModificarTramiteUseCase(
             throw new AutorizacionException("No tiene permiso para modificar trámites");
         }
         // 2. Buscamos el trámite
-        Tramite tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
+        Tramite? tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
         if (tramite == null) throw new Exception("El trámite es nulo");
         // 3. Aca pedimos el nuevo contenido y vamos a modificarlo
         ContenidoTramite nuevoContenido = new ContenidoTramite(request.NuevoContenido);
