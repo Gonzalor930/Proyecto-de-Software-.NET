@@ -10,10 +10,10 @@
 
 ## Descripción de la Arquitectura
 La solución SGE ha sido diseñada respetando la **Regla de Dependencia** de la Arquitectura Limpia. Se compone de cuatro proyectos:
-1. **SGE.Dominio:** Núcleo de negocio con entidades ricas (`Expediente`, `Tramite`) y objetos de valor inmutables.
-2. **SGE.Aplicacion:** Orquestación mediante Casos de Uso aislados que se comunican exclusivamente con DTOs (`Request`/`Response`).
-3. **SGE.Infraestructura:** Persistencia provisional mediante archivos de texto plano, implementando las interfaces de repositorio de la capa de aplicación sin el uso de LINQ.
-4. **SGE.Consola:** *Composition Root* y punto de entrada para probar la aplicación.
+1. **SGE.Dominio:** Núcleo de negocio con entidades (`Expediente`, `Tramite`) y objetos de valor inmutables.
+2. **SGE.Aplicacion:** Orquestación mediante Casos de Uso aislados que se comunican exclusivamente con DTOs.
+3. **SGE.Infraestructura:** Persistencia provisional mediante archivos de texto plano, implementando las interfaces de repositorio de la capa de aplicación.
+4. **SGE.Consola: Punto de entrada para probar la aplicación.
 
 ---
 
@@ -23,7 +23,7 @@ Para corroborar el correcto funcionamiento del sistema, toda la instanciación d
 
 A continuación, se detallan los ejemplos de código implementados en la consola y sus respectivas salidas, demostrando tanto el "Camino Feliz" como el manejo de errores de dominio e infraestructura.
 
-### 1. Configuración Inicial (Composition Root)
+### 1. Configuración Inicial
 Al inicio del `Program.cs`, se instancian los repositorios y servicios necesarios para inyectarlos en los Casos de Uso:
 
 ```csharp
