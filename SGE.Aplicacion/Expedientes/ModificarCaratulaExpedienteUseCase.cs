@@ -1,5 +1,5 @@
 using SGE.Aplicacion.Autorizacion;
-using SGE.Dominio.Expediente;
+using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
 
 namespace SGE.Aplicacion.Expedientes;
@@ -26,17 +26,15 @@ public class ModificarCaratulaExpedienteUseCase
 
         // 2. Obtener la entidad: Delegamos el acceso a datos a la interfaz del repositorio.
         Expediente? expediente = _repositorio.ObtenerPorId(request.ExpedienteId);
-// en la lines de arriba no se si poner var o si porner Expediente? par que la variable
-// expediente pueda recibir expediente
         if (expediente == null)
         {
-            throw new Exception("Expediente no encontrado."); 
+            throw new EntidadNoEncontradaException("Expediente no encontrado."); 
         }
 
         // 3. Ejecutar comportamiento del Dominio: La lógica de negocio queda en la entidad.
         Caratula nuevaCaratula = new Caratula(request.NuevaCaratula);
         expediente.ModificarCaratula(nuevaCaratula, request.IdUsuario);
-// checkear al final caratula por var, POR LAS DUDAS
+
         // 4. Persistir: Le avisamos al repositorio que guarde los cambios.
         _repositorio.Modificar(expediente);
 
