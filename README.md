@@ -1,7 +1,6 @@
 # Documento Explicativo - Sistema para la Gestión de Expedientes (SGE) 
 
 **Asignatura:** Seminario de Lenguajes (Opción .NET) - 1º Semestre 2026  
-**Fase 1:** Dominio Rico y Arquitectura Limpia  
 
 ### Integrantes del Grupo
     Alexis Veloso
