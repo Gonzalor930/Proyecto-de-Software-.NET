@@ -1,5 +1,6 @@
 using System.Dynamic;
 using SGE.Dominio.Comun;
+
 namespace SGE.Dominio.Tramites;
 public class Tramite
 {

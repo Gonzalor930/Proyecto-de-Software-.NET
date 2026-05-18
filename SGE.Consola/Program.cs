@@ -6,6 +6,8 @@ using SGE.Dominio.Comun;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
 using SGE.Infraestructura;
+using SGE.Infraestructura.Persistencia;
+using SGE.Infraestructura.Comun;
 
 namespace SGE.Consola
 {
@@ -16,18 +18,11 @@ namespace SGE.Consola
             Console.WriteLine("   SISTEMA DE GESTIÓN DE EXPEDIENTES (SGE) ");
             Console.WriteLine("===========================================");
 
-            // COMPOSITION ROOT: Instanciación de dependencias
-            // TODO: Cuando tu compañero suba la infraestructura, descomentá estas 4 líneas reales:
-            // IExpedienteRepository expedienteRepo = new ExpedienteTxtRepository();
-            // ITramiteRepository tramiteRepo = new TramiteTxtRepository();
-            // IAutorizacionService authService = new AutorizacionProvisionalService();
-            // ActualizacionEstadoExpedienteService actualizacionService = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo);
+            IExpedienteRepository expedienteRepo = new ExpedienteTxtRepository();
+            ITramiteRepository tramiteRepo = new TramiteTxtRepository();
+            IAutorizacionService authService = new AutorizacionService();
+            ActualizacionEstadoExpedienteService actualizacionService = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo);
 
-            // OBJETOS SIMULADOS TEMPORALES (Borrar/comentar cuando uses las líneas de arriba)
-            IExpedienteRepository expedienteRepo = null!;
-            ITramiteRepository tramiteRepo = null!;
-            IAutorizacionService authService = null!;
-            ActualizacionEstadoExpedienteService actualizacionService = null!;
 
             bool salir = false;
 
@@ -78,10 +73,10 @@ namespace SGE.Consola
                         break;
                     case "0":
                         salir = true;
-                        Console.WriteLine("¡Saliendo del sistema SGE! Gracias por utilizar la aplicación.");
+                        Console.WriteLine("Saliendo del sistema");
                         break;
                     default:
-                        Console.WriteLine("⚠️ Opción incorrecta. Ingrese un número válido del menú (0 al 9).");
+                        Console.WriteLine("Opción incorrecta. Ingrese un número válido del menú");
                         break;
                 }
             }
@@ -226,7 +221,7 @@ namespace SGE.Consola
 
                 if (!hayDatos)
                 {
-                    Console.WriteLine("📂 No hay expedientes registrados en el sistema actualmente.");
+                    Console.WriteLine("No hay expedientes registrados en el sistema actualmente");
                 }
                 else 
                 {
@@ -257,7 +252,7 @@ namespace SGE.Consola
 
                 if (!hayDatos)
                 {
-                    Console.WriteLine("📄 No se encontraron trámites asociados a ese expediente.");
+                    Console.WriteLine("No se encontraron trámites asociados a ese expediente.");
                 }
                 else 
                 {
@@ -280,7 +275,7 @@ namespace SGE.Consola
             {
                 Console.WriteLine($"ERROR DE PERMISOS: {ex.Message}");
             }
-            catch (EntNoEncontradaExp ex)
+            catch (RepositorioException ex)
             {
                 Console.WriteLine($"ERROR DE BÚSQUEDA: {ex.Message}");
             }
@@ -341,6 +336,33 @@ namespace SGE.Consola
                 }
                 Console.WriteLine($"Entrada incorrecta. Debe ingresar un número entero que esté entre {min} y {max}.");
             }
+        }
+    }
+    public class AutorizacionService : IAutorizacionService
+    {
+        public bool PoseeElPermiso(Guid idUsuario, Permiso permiso)
+        {
+            Guid idAdmin = Guid.Parse("11111111-1111-1111-1111-111111111111");
+            Guid idEmpleado = Guid.Parse("22222222-2222-2222-2222-222222222222");
+
+            if (idUsuario == idAdmin)
+            {
+                return true;
+            }
+            // 2. Verificamos si es el EMPLEADO
+            if (idUsuario == idEmpleado)
+            {
+                // Le bloqueamos el dar de baja
+                if (permiso == Permiso.ExpedienteBaja || permiso == Permiso.TramiteBaja)
+                {
+                    return false; 
+                }
+                
+                // Si no es baja se puede asi que recibe el permiso
+                return true;
+            }
+            // 3. Si ingresan id no valido, se deniega el permiso
+            return false;
         }
     }
 }
