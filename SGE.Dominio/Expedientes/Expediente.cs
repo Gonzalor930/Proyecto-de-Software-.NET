@@ -1,4 +1,3 @@
-using SGE.Dominio.Comun;
 using SGE.Dominio.Tramites;
 
 namespace SGE.Dominio.Expedientes;
@@ -79,19 +78,4 @@ public class Expediente
         UsuarioUltimoCambio = usuarioId;
         Estado = estado;
     }
-    public static Expediente Reconstruir(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModificacion, Guid usuario, EstadoExpediente estado)
-    {
-        return new Expediente(id, caratula, fechaCreacion, fechaModificacion, usuario, estado);
-    }
-
-    private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModificacion, Guid usuario, EstadoExpediente estado)
-    {
-        Id = id;
-        Caratula = caratula;
-        FechaCreacion = fechaCreacion;
-        FechaUltimaModificacion = fechaModificacion;
-        UsuarioUltimoCambio = usuario;
-        Estado = estado;
-    }
-
 }
