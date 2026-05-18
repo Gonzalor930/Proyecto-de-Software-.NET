@@ -31,18 +31,18 @@ namespace SGE.Consola
 
             bool salir = false;
 
-            while (!salir)
+           while (!salir)
             {
                 Console.WriteLine("\n--- MENÚ DE OPERACIONES ---");
                 Console.WriteLine("1. Dar de Alta un Expediente");
                 Console.WriteLine("2. Dar de Baja un Expediente (Y sus trámites asociados)");
                 Console.WriteLine("3. Modificar Caratula de un Expediente");
                 Console.WriteLine("4. Cambiar Estado de un Expediente (Manual)");
-                // ListarTodosLosExpedientes
                 Console.WriteLine("5. Agregar un Trámite a un Expediente");
                 Console.WriteLine("6. Dar de Baja un Trámite");
                 Console.WriteLine("7. Modificar Contenido de un Trámite");
-                //ListarTramiteDeUnExpediente
+                Console.WriteLine("8. Listar Todos los Expedientes");
+                Console.WriteLine("9. Listar Trámites de un Expediente");
                 Console.WriteLine("0. Salir del Sistema");
                 
                 string opcion = PedirTextoOpcional("Seleccione una opción: ");
@@ -70,12 +70,18 @@ namespace SGE.Consola
                     case "7":
                         ModificarTramiteInteractiva(tramiteRepo, authService, actualizacionService);
                         break;
+                    case "8":
+                        ListarTodosLosExpedientesInteractiva(expedienteRepo);
+                        break;
+                    case "9":
+                        ListarTramitesDeUnExpedienteInteractiva(tramiteRepo);
+                        break;
                     case "0":
                         salir = true;
-                        Console.WriteLine("Saliendo del sistema SGE");
+                        Console.WriteLine("¡Saliendo del sistema SGE! Gracias por utilizar la aplicación.");
                         break;
                     default:
-                        Console.WriteLine("Opción incorrecta");
+                        Console.WriteLine("⚠️ Opción incorrecta. Ingrese un número válido del menú (0 al 9).");
                         break;
                 }
             }
@@ -196,6 +202,67 @@ namespace SGE.Consola
             EjecutarSeguro(() => {
                 ModificarTramiteResponse response = casoDeUso.Ejecutar(request);
                 Console.WriteLine("El contenido del trámite fue actualizado.");
+            });
+        }
+        static void ListarTodosLosExpedientesInteractiva(IExpedienteRepository repo)
+        {
+            Console.WriteLine("\n[8] --- LISTA DE TODOS LOS EXPEDIENTES ---");
+            
+            EjecutarSeguro(() => {
+                IEnumerable<Expediente> expedientes = repo.ObtenerTodos();
+                
+                bool hayDatos = false;
+
+                foreach (Expediente exp in expedientes)
+                {
+                    hayDatos = true;
+                    Console.WriteLine("------------------------------------------------");
+                    Console.WriteLine($"ID Expediente : {exp.Id}");
+                    Console.WriteLine($"Carátula      : {exp.Caratula.Valor}");
+                    Console.WriteLine($"Estado        : {exp.Estado}");
+                    Console.WriteLine($"Fecha Creación: {exp.FechaCreacion:dd/MM/yyyy HH:mm}");
+                    Console.WriteLine($"Último Cambio : {exp.FechaUltimaModificacion:dd/MM/yyyy HH:mm}");
+                }
+
+                if (!hayDatos)
+                {
+                    Console.WriteLine("📂 No hay expedientes registrados en el sistema actualmente.");
+                }
+                else 
+                {
+                    Console.WriteLine("------------------------------------------------");
+                }
+            });
+        }
+
+        static void ListarTramitesDeUnExpedienteInteractiva(ITramiteRepository tramiteRepo)
+        {
+            Console.WriteLine("\n[9] --- LISTA DE TRÁMITES DE UN EXPEDIENTE ---");
+            Guid idExpediente = PedirGuid("Ingrese el ID del Expediente para ver sus trámites: ");
+
+            EjecutarSeguro(() => {
+                IEnumerable<Tramite> tramites = tramiteRepo.ObtenerPorExpedienteId(idExpediente);
+                
+                bool hayDatos = false;
+
+                foreach (Tramite tramite in tramites)
+                {
+                    hayDatos = true;
+                    Console.WriteLine("------------------------------------------------");
+                    Console.WriteLine($"ID Trámite    : {tramite.id}");
+                    Console.WriteLine($"Etiqueta      : {tramite.Etiqueta}");
+                    Console.WriteLine($"Contenido     : {tramite.Contenido.Valor}");
+                    Console.WriteLine($"Fecha Creación: {tramite.FechaCreacion:dd/MM/yyyy HH:mm}");
+                }
+
+                if (!hayDatos)
+                {
+                    Console.WriteLine("📄 No se encontraron trámites asociados a ese expediente.");
+                }
+                else 
+                {
+                    Console.WriteLine("------------------------------------------------");
+                }
             });
         }
 
