@@ -1,6 +1,7 @@
 using SGE.Aplicacion.Autorizacion;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
+using SGE.Aplicacion.Excepciones;
 
 namespace SGE.Aplicacion.Expedientes;
 public class ModificarCaratulaExpedienteUseCase
@@ -28,7 +29,7 @@ public class ModificarCaratulaExpedienteUseCase
         Expediente? expediente = _repositorio.ObtenerPorId(request.ExpedienteId);
         if (expediente == null)
         {
-            throw new EntidadNoEncontradaException("Expediente no encontrado."); 
+            throw new EntNoEncontradaExp("Expediente no encontrado."); 
         }
 
         // 3. Ejecutar comportamiento del Dominio: La lógica de negocio queda en la entidad.

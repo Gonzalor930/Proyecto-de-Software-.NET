@@ -38,9 +38,11 @@ namespace SGE.Consola
                 Console.WriteLine("2. Dar de Baja un Expediente (Y sus trámites asociados)");
                 Console.WriteLine("3. Modificar Caratula de un Expediente");
                 Console.WriteLine("4. Cambiar Estado de un Expediente (Manual)");
+                // ListarTodosLosExpedientes
                 Console.WriteLine("5. Agregar un Trámite a un Expediente");
                 Console.WriteLine("6. Dar de Baja un Trámite");
                 Console.WriteLine("7. Modificar Contenido de un Trámite");
+                //ListarTramiteDeUnExpediente
                 Console.WriteLine("0. Salir del Sistema");
                 
                 string opcion = PedirTextoOpcional("Seleccione una opción: ");
@@ -89,7 +91,7 @@ namespace SGE.Consola
             AltaExpedienteUseCase casoDeUso = new AltaExpedienteUseCase(repo, auth);
 
             EjecutarSeguro(() => {
-                AgregarExpedienteResponse response = casoDeUso.Result(request); // Nota: Si tu método se llama Ejecutar o Result, adaptalo acá. Vimos Ejecutar en los anteriores.
+                AgregarExpedienteResponse response = casoDeUso.Ejecutar(request); // Nota: Si tu método se llama Ejecutar o Result, adaptalo acá. Vimos Ejecutar en los anteriores.
                 Console.WriteLine($"Expediente creado. ID Asignado: {response.ExpedienteId}");
             });
         }
@@ -211,7 +213,7 @@ namespace SGE.Consola
             {
                 Console.WriteLine($"ERROR DE PERMISOS: {ex.Message}");
             }
-            catch (EntidadNoEncontradaException ex)
+            catch (EntNoEncontradaExp ex)
             {
                 Console.WriteLine($"ERROR DE BÚSQUEDA: {ex.Message}");
             }
