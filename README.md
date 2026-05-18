@@ -13,7 +13,7 @@ La solución SGE ha sido diseñada respetando la **Regla de Dependencia** de la 
 1. **SGE.Dominio:** Núcleo de negocio con entidades (`Expediente`, `Tramite`) y objetos de valor inmutables.
 2. **SGE.Aplicacion:** Orquestación mediante Casos de Uso aislados que se comunican exclusivamente con DTOs.
 3. **SGE.Infraestructura:** Persistencia provisional mediante archivos de texto plano, implementando las interfaces de repositorio de la capa de aplicación.
-4. **SGE.Consola: Punto de entrada para probar la aplicación.
+4. **SGE.Consola:** Punto de entrada para probar la aplicación.
 
 ---
 
