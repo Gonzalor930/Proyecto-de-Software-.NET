@@ -5,7 +5,7 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Comun;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
-using SGE.Infraestructura;
+using SGE.Infraestructura.Persistencia;
 
 namespace SGE.Consola
 {
@@ -16,18 +16,10 @@ namespace SGE.Consola
             Console.WriteLine("   SISTEMA DE GESTIÓN DE EXPEDIENTES (SGE) ");
             Console.WriteLine("===========================================");
 
-            // COMPOSITION ROOT: Instanciación de dependencias
-            // TODO: Cuando tu compañero suba la infraestructura, descomentá estas 4 líneas reales:
-            // IExpedienteRepository expedienteRepo = new ExpedienteTxtRepository();
-            // ITramiteRepository tramiteRepo = new TramiteTxtRepository();
-            // IAutorizacionService authService = new AutorizacionProvisionalService();
-            // ActualizacionEstadoExpedienteService actualizacionService = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo);
-
-            // OBJETOS SIMULADOS TEMPORALES (Borrar/comentar cuando uses las líneas de arriba)
-            IExpedienteRepository expedienteRepo = null!;
-            ITramiteRepository tramiteRepo = null!;
-            IAutorizacionService authService = null!;
-            ActualizacionEstadoExpedienteService actualizacionService = null!;
+            IExpedienteRepository expedienteRepo = new ExpedienteTxtRepository();
+            ITramiteRepository tramiteRepo = new TramiteTxtRepository();
+            IAutorizacionService authService = new AutorizacionProvisionalService();
+            ActualizacionEstadoExpedienteService actualizacionService = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo);
 
             bool salir = false;
 
@@ -275,5 +267,10 @@ namespace SGE.Consola
                 Console.WriteLine($"Entrada incorrecta. Debe ingresar un número entero que esté entre {min} y {max}.");
             }
         }
+    }
+    public class AutorizacionProvisionalService : IAutorizacionService
+    {
+        // Devuelve siempre true para que te deje probar todas las opciones del menú
+        public bool PoseeElPermiso(Guid idUsuario, Permiso permiso) => true;
     }
 }
