@@ -1,4 +1,3 @@
-using SGE.Dominio.Comun;
 using SGE.Dominio.Tramites;
 
 namespace SGE.Dominio.Expedientes;
@@ -65,21 +64,18 @@ public class Expediente
         UsuarioUltimoCambio = idUsuario;
         FechaUltimaModificacion = DateTime.Now;
     }
-    //agregue esta parte ya que el tp nos pedia "constructores Factory Method para su reconstrucción"
-    // que es justamente el reconstructor y tambien el nuevo constructor con todos los datos
-    public static Expediente Reconstruir(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModificacion, Guid usuario, EstadoExpediente estado)
+    public static Expediente Reconstruir(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModif, Guid usuarioId, EstadoExpediente estado)
     {
-        return new Expediente(id, caratula, fechaCreacion, fechaModificacion, usuario, estado);
+        return new Expediente(id, caratula, fechaCreacion, fechaModif, usuarioId, estado);
     }
 
-    private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModificacion, Guid usuario, EstadoExpediente estado)
+    private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModif, Guid usuarioId, EstadoExpediente estado)
     {
         Id = id;
         Caratula = caratula;
         FechaCreacion = fechaCreacion;
-        FechaUltimaModificacion = fechaModificacion;
-        UsuarioUltimoCambio = usuario;
+        FechaUltimaModificacion = fechaModif;
+        UsuarioUltimoCambio = usuarioId;
         Estado = estado;
     }
-
 }
