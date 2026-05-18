@@ -25,6 +25,17 @@ public class Tramite
 
         Invariantes();
     }
+    public void ModificarContenido(ContenidoTramite nuevoContenido, Guid idUsuario)
+    {
+        if (nuevoContenido == null)
+        {
+            throw new DominioException("El contenido a modificar no puede ser nulo.");
+        }
+
+        Contenido = nuevoContenido;
+        UsuarioUltimoCambio = idUsuario;
+        FechaUltimaModificacion = DateTime.Now;
+    }
 
     private void Invariantes()
     {

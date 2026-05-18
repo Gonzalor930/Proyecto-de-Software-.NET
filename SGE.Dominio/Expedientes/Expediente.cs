@@ -6,12 +6,12 @@ namespace SGE.Dominio.Expedientes;
 public class Expediente
 {
     public Guid Id { get; private set; }
-    public  Caratula Caratula { get; private set; }
+    public Caratula Caratula { get; private set; }
     public DateTime FechaCreacion { get; private set; }
     public DateTime FechaUltimaModificacion { get; private set; }
     public Guid UsuarioUltimoCambio{ get; private set; }
     public EstadoExpediente Estado { get; private set; } 
-     
+    
 
     public Expediente(Caratula caratula, Guid usuarioUltimoCambio)
     {
