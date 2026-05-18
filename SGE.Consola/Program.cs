@@ -5,9 +5,10 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Comun;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
-using SGE.Infraestructura;
 using SGE.Infraestructura.Persistencia;
 using SGE.Infraestructura.Comun;
+using SGE.Infraestructura.Seguridad;
+
 
 namespace SGE.Consola
 {
@@ -338,31 +339,5 @@ namespace SGE.Consola
             }
         }
     }
-    public class AutorizacionService : IAutorizacionService
-    {
-        public bool PoseeElPermiso(Guid idUsuario, Permiso permiso)
-        {
-            Guid idAdmin = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            Guid idEmpleado = Guid.Parse("22222222-2222-2222-2222-222222222222");
-
-            if (idUsuario == idAdmin)
-            {
-                return true;
-            }
-            // 2. Verificamos si es el EMPLEADO
-            if (idUsuario == idEmpleado)
-            {
-                // Le bloqueamos el dar de baja
-                if (permiso == Permiso.ExpedienteBaja || permiso == Permiso.TramiteBaja)
-                {
-                    return false; 
-                }
-                
-                // Si no es baja se puede asi que recibe el permiso
-                return true;
-            }
-            // 3. Si ingresan id no valido, se deniega el permiso
-            return false;
-        }
-    }
+    
 }
