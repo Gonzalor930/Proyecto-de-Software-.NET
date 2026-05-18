@@ -65,4 +65,21 @@ public class Expediente
         UsuarioUltimoCambio = idUsuario;
         FechaUltimaModificacion = DateTime.Now;
     }
+    //agregue esta parte ya que el tp nos pedia "constructores Factory Method para su reconstrucción"
+    // que es justamente el reconstructor y tambien el nuevo constructor con todos los datos
+    public static Expediente Reconstruir(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModificacion, Guid usuario, EstadoExpediente estado)
+    {
+        return new Expediente(id, caratula, fechaCreacion, fechaModificacion, usuario, estado);
+    }
+
+    private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaModificacion, Guid usuario, EstadoExpediente estado)
+    {
+        Id = id;
+        Caratula = caratula;
+        FechaCreacion = fechaCreacion;
+        FechaUltimaModificacion = fechaModificacion;
+        UsuarioUltimoCambio = usuario;
+        Estado = estado;
+    }
+
 }

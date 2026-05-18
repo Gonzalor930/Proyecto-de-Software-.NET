@@ -7,7 +7,7 @@ namespace SGE.Aplicacion.Tramites;
 public class AgregarTramiteUseCase(
     ITramiteRepository tramiteRepositorio, 
     IAutorizacionService autorizacion,
-    ActualizacionEstadoExpedienteService actualizacionService)
+    ActualizacionEstadoExpedienteService Service)
 {
     public AgregarTramiteResponse Ejecutar(AgregarTramiteRequest request)
     {
@@ -17,19 +17,17 @@ public class AgregarTramiteUseCase(
             throw new AutorizacionException("No tiene permisos para dar de alta trámites.");
         }
 
-        // 2. Dominio: Tipos explícitos para mayor claridad
         ContenidoTramite contenidoNuevo = new ContenidoTramite(request.Contenido);
         Tramite nuevoTramite = new Tramite(
             request.ExpedienteId, 
             (EtiquetaTramite)request.Etiqueta, 
             contenidoNuevo, 
-            request.IdUsuario
-        );
+            request.IdUsuario);
         tramiteRepositorio.Agregar(nuevoTramite);
 
         // 3.Aca usamos el service que esta en expediente
-        actualizacionService.ActualizarEstadoSiEsNecesario(request.ExpedienteId, request.IdUsuario);
+        Service.ActualizarEstadoSiEsNecesario(request.ExpedienteId, request.IdUsuario);
 
-        [cite_start]return new AgregarTramiteResponse(nuevoTramite.id);
+        return new AgregarTramiteResponse(nuevoTramite.id);
     }
 }
