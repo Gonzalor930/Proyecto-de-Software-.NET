@@ -143,6 +143,3 @@ dotnet run --project SGE.Consola
 
 
 Los datos persistidos durante las pruebas podrán verificarse abriendo los archivos `expedientes.txt` y `tramites.txt` que se generarán automáticamente en el directorio de salida del proyecto de consola.
-```
-
-```
