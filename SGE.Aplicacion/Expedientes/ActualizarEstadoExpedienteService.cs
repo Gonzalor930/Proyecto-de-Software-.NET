@@ -1,11 +1,8 @@
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
-
-namespace SGE.Aplicacion.Expedientes
-{
-    using SGE.Dominio.Expedientes;
-using SGE.Dominio.Tramites;
-using SGE.Aplicacion.Excepciones; // Agregamos el using para tu nueva excepción
+using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Comun;
+using SGE.Aplicacion.Tramites;
 
 namespace SGE.Aplicacion.Expedientes
 {
@@ -26,7 +23,7 @@ namespace SGE.Aplicacion.Expedientes
             if (expediente == null)
             {
                 // Usamos la excepción nueva
-                throw new EntidadNoEncontradaException("Expediente no encontrado al intentar actualizar su estado");
+                throw new EntNoEncontradaExp("Expediente no encontrado al intentar actualizar su estado");
             }
 
             IEnumerable<Tramite> tramites = _tramiteRepository.ObtenerPorExpedienteId(expedienteId);
@@ -43,5 +40,4 @@ namespace SGE.Aplicacion.Expedientes
             }
         }
     }
-}
 }

@@ -1,8 +1,8 @@
 namespace SGE.Aplicacion.Excepciones 
 {
-    public class EntidadNoEncontradaException : Exception
+    public class EntNoEncontradaExp : Exception
     {
-        public EntidadNoEncontradaException(string mensaje) : base(mensaje)
+        public EntNoEncontradaExp(string mensaje) : base(mensaje)
         {
         }
     }
