@@ -20,12 +20,8 @@ public class ModificarTramiteUseCase(
 
         // 2. Buscamos el trámite
         Tramite? tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
-<<<<<<< HEAD
-        if (tramite == null) throw new Exception("El trámite es nulo");
-=======
         if (tramite == null) throw new EntNoEncontradaExp("El trámite es nulo");
 
->>>>>>> e327cdfa1b750f97eb61da8b66d1ca85315bc470
         // 3. Aca pedimos el nuevo contenido y vamos a modificarlo
         ContenidoTramite nuevoContenido = new ContenidoTramite(request.NuevoContenido);
         tramite.ModificarContenido(nuevoContenido, request.IdUsuario);
