@@ -3,9 +3,9 @@
 **Asignatura:** Seminario de Lenguajes (Opción .NET) - 1º Semestre 2026  
 
 ### Integrantes del Grupo
-    Alexis Veloso
-    Thomas Carabelli
-    Gonzalo Romano
+    Alexis Veloso 21102/3
+    Thomas Carabelli 26183/4
+    Gonzalo Romano 25626/6
 ---
 
 ## Descripción de la Arquitectura
