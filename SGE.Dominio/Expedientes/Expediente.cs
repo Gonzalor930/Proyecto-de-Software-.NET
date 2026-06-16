@@ -16,7 +16,7 @@ public class Expediente
     public Expediente(Caratula caratula, Guid usuarioUltimoCambio)
     {
         Id = Guid.NewGuid();
-        Caratula = caratula ?? throw new DominioException("La caratula no puede ser nula");
+        Caratula = caratula;
         FechaCreacion = DateTime.Now;
         FechaUltimaModificacion = DateTime.Now;
         UsuarioUltimoCambio = usuarioUltimoCambio;
@@ -24,7 +24,7 @@ public class Expediente
     }   
     public void ModificarCaratula(Caratula nuevaCaratula, Guid idUsuario)
     {
-        Caratula = nuevaCaratula ?? throw new DominioException("La caratula no puede ser nula");
+        Caratula = nuevaCaratula;
         UsuarioUltimoCambio = idUsuario;
         FechaUltimaModificacion = DateTime.Now;
     }
