@@ -22,7 +22,7 @@ namespace SGE.Consola
             IExpedienteRepository expedienteRepo = new ExpedienteTxtRepository();
             ITramiteRepository tramiteRepo = new TramiteTxtRepository();
             IAutorizacionService authService = new AutorizacionService();
-            ActualizacionEstadoExpedienteService actualizacionService = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo);
+            ActualizacionEstadoExpedienteService actualizacionService = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo, authService);
 
 
             bool salir = false;
