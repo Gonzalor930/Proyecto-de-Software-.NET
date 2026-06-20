@@ -3,8 +3,9 @@ using SGE.Aplicacion.Autorizacion;
 
 namespace SGE.Aplicacion.Expedientes;
 
-public class AltaExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)
+public class AltaExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo uow)
 {
+
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
         
@@ -17,7 +18,8 @@ public class AltaExpedienteUseCase(IExpedienteRepository repositorio, IAutorizac
         Expediente nuevoExpediente = new Expediente(caratulaNueva, request.IdUsuario);
 
         repositorio.Agregar(nuevoExpediente);
-
+        uow.Guardar();
+        
         return new AgregarExpedienteResponse(nuevoExpediente.Id);
     }
 }
