@@ -9,7 +9,9 @@ namespace SGE.Aplicacion.Expedientes;
 public class BajaExpedienteUseCase(
     IExpedienteRepository repositorio, 
     ITramiteRepository tramiteRepositorio, 
-    IAutorizacionService autorizacion)
+    IAutorizacionService autorizacion,
+    IUnidadDeTrabajo uow
+    )
 {
     public BajaExpedienteResponse Ejecutar(BajaExpedienteRequest request)
     {
@@ -32,7 +34,7 @@ public class BajaExpedienteUseCase(
         }
 
         repositorio.Eliminar(request.ExpedienteId);
-        
+        uow.Guardar();
         return new BajaExpedienteResponse(true);
     }   
 }

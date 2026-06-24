@@ -8,7 +8,9 @@ namespace SGE.Aplicacion.Tramites;
 public class BajaTramiteUseCase(
     ITramiteRepository tramiteRepositorio, 
     IAutorizacionService autorizacion,
-    ActualizacionEstadoExpedienteService Service)
+    ActualizacionEstadoExpedienteService Service,
+    IUnidadDeTrabajo uow
+    )
 {
     public BajaTramiteResponse Ejecutar(BajaTramiteRequest request)
     {
@@ -19,7 +21,7 @@ public class BajaTramiteUseCase(
         }
         // 2. Buscamos el trámite
         Tramite? tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
-        if (tramite == null) throw new EntNoEncontradaExp("El trámite no existe");
+        if (tramite == null) throw new EntidadNoEncontradaException("El trámite no existe");
 
         // 2. Aca guardamos el id del exp para cuando vayamos a actualizar el estado, ya que si
         //lo borramos y no guardamos el id no vamos a saber que expediente tenemos que actualizar
@@ -30,7 +32,7 @@ public class BajaTramiteUseCase(
 
         // 4. Usamos el ID que nos guardamos, para actualizar
         Service.ActualizarEstadoSiEsNecesario(idExpedienteAActualizar, request.IdUsuario);
-
+        uow.Guardar();
         return new BajaTramiteResponse(true); 
     }
 }
