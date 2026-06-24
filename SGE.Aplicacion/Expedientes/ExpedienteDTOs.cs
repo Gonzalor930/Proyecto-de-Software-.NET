@@ -1,3 +1,6 @@
+using SGE.Dominio.Expedientes;
+using SGE.Aplicacion.Tramites;
+
 namespace SGE.Aplicacion.Expedientes{
     public record AgregarExpedienteRequest(Guid IdUsuario, string DetalleCaratula);
     public record BajaExpedienteRequest(Guid IdUsuario, Guid ExpedienteId);
@@ -8,7 +11,7 @@ namespace SGE.Aplicacion.Expedientes{
     public record ModificarCaratulaExpedienteResponse(bool Exito);
     public record CambiarEstadoExpedienteResponse(bool Exito);
     public record ListarExpedientesRequest();
-    
+
     public record ExpedienteDTO(
         Guid Id, 
         string Caratula, 
@@ -18,4 +21,7 @@ namespace SGE.Aplicacion.Expedientes{
     );
     
     public record ListarExpedientesResponse(IEnumerable<ExpedienteDTO> Expedientes);
+    public record ObtenerExpedienteRequest(Guid ExpedienteId);
+    public record ObtenerExpedienteResponse(ExpedienteDTO expediente, IEnumerable<TramiteDTO> Tramites);
+
 }

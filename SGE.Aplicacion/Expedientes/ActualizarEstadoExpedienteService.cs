@@ -34,7 +34,7 @@ namespace SGE.Aplicacion.Expedientes
             Expediente? expediente = _expedienteRepository.ObtenerPorId(expedienteId);
             if (expediente == null)
             {
-                throw new EntNoEncontradaExp("Expediente no encontrado al intentar actualizar su estado");
+                throw new EntidadNoEncontradaException("Expediente no encontrado al intentar actualizar su estado");
             }
 
             // 3. Traemos los trámites asociados
