@@ -8,7 +8,9 @@ namespace SGE.Aplicacion.Tramites;
 public class ModificarTramiteUseCase(
     ITramiteRepository tramiteRepositorio, 
     IAutorizacionService autorizacion,
-    ActualizacionEstadoExpedienteService Service)
+    ActualizacionEstadoExpedienteService Service,
+    IUnidadDeTrabajo uow
+    )
 {
     public ModificarTramiteResponse Ejecutar(ModificarTramiteRequest request)
     {
@@ -20,7 +22,7 @@ public class ModificarTramiteUseCase(
 
         // 2. Buscamos el trámite
         Tramite? tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
-        if (tramite == null) throw new EntNoEncontradaExp("El trámite es nulo");
+        if (tramite == null) throw new EntidadNoEncontradaException("El trámite es nulo");
 
         // 3. Aca pedimos el nuevo contenido y vamos a modificarlo
         ContenidoTramite nuevoContenido = new ContenidoTramite(request.NuevoContenido);
@@ -31,7 +33,7 @@ public class ModificarTramiteUseCase(
 
         // 5. Usamos el service para actualizar
         Service.ActualizarEstadoSiEsNecesario(tramite.ExpedienteId, request.IdUsuario);
-
+        uow.Guardar();
         return new ModificarTramiteResponse(true); 
     }
 }
