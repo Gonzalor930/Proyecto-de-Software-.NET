@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using SGE.Dominio.Autorizacion;
 
-namespace SGE.Dominio.Usuario
+namespace SGE.Dominio.Usuarios
 {
     public class Usuario
     {
@@ -16,6 +16,7 @@ namespace SGE.Dominio.Usuario
 
         public IReadOnlyCollection<Permiso> Permisos => _permisos.AsReadOnly();
 
+        // Constructor para infraestructura y WebAPI
         public Usuario(string nombre, string correoElectronico, string contrasenaHash, bool esAdministrador = false)
         {
             if (string.IsNullOrWhiteSpace(nombre))
@@ -34,8 +35,17 @@ namespace SGE.Dominio.Usuario
             EsAdministrador = esAdministrador;
             _permisos = new List<Permiso>();
         }
-
-        // Metodos publicos para la asignación de permisos de forma segura
+        
+        // Constructor para las Seeds
+        public Usuario(Guid id, string nombre, string correoElectronico, string contrasenaHash, bool esAdministrador)
+        {
+            Id = id;
+            Nombre = nombre;
+            CorreoElectronico = correoElectronico;
+            ContrasenaHash = contrasenaHash;
+            EsAdministrador = esAdministrador;
+            _permisos = new List<Permiso>();
+        }
         public void AsignarPermiso(Permiso permiso)
         {
             if (!_permisos.Contains(permiso))

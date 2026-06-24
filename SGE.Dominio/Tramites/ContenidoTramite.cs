@@ -1,4 +1,4 @@
-using SGE.Dominio.Comun; //en comun guardariamos el exception
+using SGE.Dominio.Comun;
 
 namespace SGE.Dominio.Tramites;
 
