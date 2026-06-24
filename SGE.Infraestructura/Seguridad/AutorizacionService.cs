@@ -1,25 +1,34 @@
-using SGE.Aplicacion.Autorizacion;
+using SGE.Aplicacion.Autorizacion; // Asumiendo que IAutorizacionService está en SGE.Aplicacion.Servicios
+using SGE.Dominio.Usuarios;
+using SGE.Dominio.Repositorios;
+using System;
+using System.Linq;
+using SGE.Dominio.Autorizacion;
 
-namespace SGE.Infraestructura.Seguridad
+namespace SGE.Infraestructura.Servicios
 {
     public class AutorizacionService : IAutorizacionService
     {
-        public bool PoseeElPermiso(Guid idUsuario, Permiso permiso)
+        private readonly IUsuarioRepository _usuarioRepository;
+
+        public AutorizacionService(IUsuarioRepository usuarioRepository)
         {
-            Guid idAdmin = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            Guid idEmpleado = Guid.Parse("22222222-2222-2222-2222-222222222222");
+            _usuarioRepository = usuarioRepository ?? throw new ArgumentNullException(nameof(usuarioRepository));
+        }
+        public bool PoseeElPermiso(Guid usuarioId, Permiso permisoRequerido)
+        {
+            var usuario = _usuarioRepository.ObtenerPorId(usuarioId);
+            
+            if (usuario == null) return false;
 
-            if (idUsuario == idAdmin)
-            {
-                return true;
-            }
+            if (usuario.EsAdministrador) return true;
 
-            if (idUsuario == idEmpleado)
+            var permisos = usuario.Permisos;
+
+            if (permisos.Contains(permisoRequerido)) return true;
+
+            if (permisoRequerido == Permiso.TramiteBaja && permisos.Contains(Permiso.ExpedienteBaja))
             {
-                if (permiso == Permiso.ExpedienteBaja || permiso == Permiso.TramiteBaja)
-                {
-                    return false; 
-                }
                 return true;
             }
 
