@@ -21,7 +21,8 @@ public class Expediente
         FechaUltimaModificacion = DateTime.Now;
         UsuarioUltimoCambio = usuarioUltimoCambio;
         Estado = EstadoExpediente.RecienIniciado;
-    }   
+    }
+    protected Expediente(){}
     public void ModificarCaratula(Caratula nuevaCaratula, Guid idUsuario)
     {
         Caratula = nuevaCaratula;

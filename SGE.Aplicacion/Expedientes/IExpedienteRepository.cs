@@ -5,7 +5,7 @@ namespace SGE.Aplicacion.Expedientes
     {
         void Agregar(Expediente expediente);
         void Modificar(Expediente expediente);
-        void Eliminar(Guid expedienteId);
+        void Eliminar(Expediente expediente);
         Expediente? ObtenerPorId(Guid expedienteId);
         IEnumerable<Expediente> ObtenerTodos();
     }

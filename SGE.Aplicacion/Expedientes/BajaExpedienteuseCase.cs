@@ -31,10 +31,10 @@ public class BajaExpedienteUseCase(
         
         foreach (var tramite in tramites)
         {
-            tramiteRepositorio.Eliminar(tramite.id);
+            tramiteRepositorio.Eliminar(tramite);
         }
 
-        repositorio.Eliminar(request.ExpedienteId);
+        repositorio.Eliminar(expediente);
         uow.Guardar();
         return new BajaExpedienteResponse(true);
     }   

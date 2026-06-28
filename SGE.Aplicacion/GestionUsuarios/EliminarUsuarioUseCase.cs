@@ -1,3 +1,4 @@
+using SGE.Aplicacion;
 using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Repositorios;

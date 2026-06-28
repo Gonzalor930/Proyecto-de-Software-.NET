@@ -8,6 +8,9 @@ using SGE.Infraestructura.Persistencia;
 using SGE.Infraestructura.Repositorios;
 using SGE.Infraestructura.Servicios;
 using System;
+using SGE.Infraestructura.Seguridad;
+using SGE.Aplicacion.Tramites;
+using SGE.Aplicacion.Expedientes;
 
 namespace SGE.Infraestructura.Extensiones
 {
@@ -17,13 +20,17 @@ namespace SGE.Infraestructura.Extensiones
         {
             // La cadena de conexion "DefaultConnection" debe estar en el appsettings.json de la WebApi
             services.AddDbContext<SgeContext>(options =>
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(configuration.GetConnectionString("SgeDatabase")));
 
             // Registro de dependencias con ciclo de vida Scoped
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IExpedienteRepository, ExpedienteRepository>();
+            services.AddScoped<ITramiteRepository, TramiteRepository>();
             services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();
             services.AddScoped<IAutorizacionService, AutorizacionService>();
-
+            services.AddSingleton<IHashService, HashService>();
+            services.AddScoped<IJwtProvider, JwtProvider>();
+            
             return services;
         }
 

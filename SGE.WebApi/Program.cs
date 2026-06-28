@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -6,6 +7,7 @@ using SGE.Aplicacion;
 using SGE.Infraestructura.Extensiones;
 using SGE.WebApi.Middlewares;
 using SGE.WebApi.Endpoints;
+using SGE.Infraestructura.Persistencia;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,13 @@ builder.Services.AddInfraestructura(builder.Configuration);
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<SgeContext>();
+    context.Database.EnsureCreated(); 
+    context.Database.ExecuteSqlRaw("PRAGMA journal_mode=DELETE;");
+}
+
 // ==============================================================================
 // 2. PIPELINE DE MIDDLEWARES (Orden estricto obligatorio)
 // ==============================================================================
@@ -62,15 +71,22 @@ app.UseAuthorization();
 // ==============================================================================
 // 3. CONFIGURACIÓN DE SCALAR (Interfaz Gráfica)
 // ==============================================================================
-
+Console.WriteLine($"Environment: {app.Environment.EnvironmentName}");
 if (app.Environment.IsDevelopment())
 {
+    // Expone el archivo JSON con la definición de la API
     app.MapOpenApi();
+    
+    // Configura y levanta la interfaz gráfica de Scalar
     app.MapScalarApiReference(options =>
     {
-        options.WithTitle("API del Sistema de Gestión de Expedientes");
-        // Asegura que Scalar permita enviar el token JWT para probar rutas protegidas
+        options.WithTitle("Sistema de Gestión de Expedientes");
+        options.WithTheme(ScalarTheme.Mars);
         options.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+        options.Authentication = new ScalarAuthenticationOptions
+        {
+            PreferredSecuritySchemes = new[] {"Bearer"}
+        };
     });
 }
 

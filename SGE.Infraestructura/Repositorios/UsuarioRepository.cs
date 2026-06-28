@@ -17,7 +17,7 @@ namespace SGE.Infraestructura.Repositorios
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Usuario ObtenerPorId(Guid id)
+        public Usuario? ObtenerPorId(Guid id)
         {
             return _context.Usuarios.Find(id);
         }
@@ -43,6 +43,11 @@ namespace SGE.Infraestructura.Repositorios
         {
             if (usuario == null) throw new ArgumentNullException(nameof(usuario));
             _context.Usuarios.Remove(usuario);
+        }
+
+        public Usuario? ObtenerPorCorreo(string correo)
+        {
+            return _context.Usuarios.FirstOrDefault(u => u.CorreoElectronico == correo);
         }
     }
 }

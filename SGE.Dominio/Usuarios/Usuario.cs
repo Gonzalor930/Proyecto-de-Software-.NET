@@ -35,6 +35,11 @@ namespace SGE.Dominio.Usuarios
             EsAdministrador = esAdministrador;
             _permisos = new List<Permiso>();
         }
+        //constructor para la db
+        protected Usuario()
+        {
+            _permisos = new List<Permiso>();
+        }
         
         // Constructor para las Seeds
         public Usuario(Guid id, string nombre, string correoElectronico, string contrasenaHash, bool esAdministrador)
@@ -60,6 +65,22 @@ namespace SGE.Dominio.Usuarios
             {
                 _permisos.Remove(permiso);
             }
+        }
+
+       public void ModificarDatos(string nuevoNombre, string nuevaContrasenaHash)
+        {
+            if (string.IsNullOrWhiteSpace(nuevoNombre))
+                throw new ArgumentException("El nombre es obligatorio.");
+        
+            if (string.IsNullOrWhiteSpace(nuevaContrasenaHash))
+                throw new ArgumentException("El hash de la contraseña no puede ser nulo o vacio.");
+
+            Nombre = nuevoNombre;
+            ContrasenaHash = nuevaContrasenaHash;
+        }
+        public bool ValidarContrasena(string hashAComparar)
+        {
+            return ContrasenaHash == hashAComparar;
         }
     }
 }

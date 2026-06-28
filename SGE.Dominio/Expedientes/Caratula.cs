@@ -15,4 +15,6 @@ public record class Caratula
         
         Valor = valor;
     }
+    private Caratula(){}
+
 }
