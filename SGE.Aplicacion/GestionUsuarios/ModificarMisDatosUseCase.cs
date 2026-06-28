@@ -1,9 +1,9 @@
 using SGE.Dominio.Usuarios;
 using SGE.Aplicacion.Excepciones;
 using SGE.Aplicacion.Autorizacion;
+using SGE.Dominio.Repositorios;
 
-namespace SGE.Aplicacion.GestionUsuarios;
-
+namespace SGE.Aplicacion.GestionUsuarios{
 public class ModificarMisDatosUseCase(IUsuarioRepository repo, IUnidadDeTrabajo unidadDeTrabajo)
 {
     public ModificarMisDatosResponse Ejecutar(ModificarMisDatosRequest request)
@@ -28,4 +28,5 @@ public class ModificarMisDatosUseCase(IUsuarioRepository repo, IUnidadDeTrabajo 
 
         return new ModificarMisDatosResponse(true);
     }
+}
 }

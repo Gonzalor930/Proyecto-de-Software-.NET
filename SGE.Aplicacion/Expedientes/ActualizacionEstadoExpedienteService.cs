@@ -4,6 +4,7 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Comun;
 using SGE.Aplicacion.Tramites;
 using SGE.Aplicacion.Autorizacion;
+using SGE.Dominio.Autorizacion;
 
 namespace SGE.Aplicacion.Expedientes
 {

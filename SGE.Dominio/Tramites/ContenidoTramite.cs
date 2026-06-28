@@ -13,4 +13,5 @@ public class ContenidoTramite
         }
         Valor=valor_;
     }
+    private ContenidoTramite(){}
 }

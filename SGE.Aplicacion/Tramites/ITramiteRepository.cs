@@ -5,7 +5,7 @@ namespace SGE.Aplicacion.Tramites
     {
         void Agregar(Tramite tramite);
         void Modificar(Tramite tramite);
-        void Eliminar(Guid tramiteId);
+        void Eliminar(Tramite tramiteId);
         Tramite? ObtenerPorId(Guid tramiteId);
         IEnumerable<Tramite> ObtenerPorExpedienteId(Guid expedienteId);
     }

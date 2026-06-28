@@ -9,7 +9,7 @@ namespace SGE.Aplicacion.Expedientes{
         {
             _repositorio = repositorio;
         }
-        public ListarExpedientesResponse Ejecutar(ListarExpedientesRequest request)
+        public ListarExpedientesResponse Ejecutar()
         {
             //Busca la entidad en el repositorio
             IEnumerable<Expediente> expedientesDominio = _repositorio.ObtenerTodos();

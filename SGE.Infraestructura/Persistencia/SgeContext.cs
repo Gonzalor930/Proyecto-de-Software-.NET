@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using SGE.Dominio.Autorizacion;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+
 
 namespace SGE.Infraestructura.Persistencia
 {
@@ -28,21 +30,29 @@ namespace SGE.Infraestructura.Persistencia
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(u => u.Id);
-                
-                entity.Property(u => u.Permisos)
-                      .HasConversion(
-                          v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
-                          v => JsonSerializer.Deserialize<List<Dominio.Autorizacion.Permiso>>(v, (JsonSerializerOptions)null) ?? new List<Permiso>())
-                      .Metadata.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+                entity.Property<List<Permiso>>("_permisos")  // accede al campo privado
+                    .HasColumnName("Permisos")
+                    .HasConversion(
+                        v => JsonSerializer.Serialize(v, JsonSerializerOptions.Default),
+                        v => JsonSerializer.Deserialize<List<Permiso>>(v, JsonSerializerOptions.Default) ?? new List<Permiso>()
+                    )
+                    .Metadata.SetValueComparer(new ValueComparer<List<Permiso>>(
+                        (c1, c2) => c1!.SequenceEqual(c2!),
+                        c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                        c => c.ToList()
+                    )); 
             });
 
             //Configuracion de expediente
             modelBuilder.Entity<Expediente>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                
-                //mapeo del Value Object
-                entity.ComplexProperty(e => e.Caratula); 
+                entity.ComplexProperty(e => e.Caratula, pr =>
+                {
+                    pr.Property(c => c.Valor).HasColumnName("CaratulaValor");
+                });
+                entity.Property(e => e.Estado).HasConversion<string>();
             });
 
             //Configuracion de Tramite
@@ -63,14 +73,15 @@ namespace SGE.Infraestructura.Persistencia
 
         private void SeedUsuarios(ModelBuilder modelBuilder)
         {
+            var hashService = new HashService();
             var adminId = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            var admin = new Usuario(adminId, "Administrador del Sistema", "admin@sge.com", HashHelper.HashearPassword("admin123"), true); 
+            var admin = new Usuario(adminId, "Administrador del Sistema", "admin@sge.com", hashService.HashearPassword("admin123"), true); 
             
             var prueba1Id = Guid.Parse("22222222-2222-2222-2222-222222222222");
-            var prueba1 = new Usuario(prueba1Id, "Usuario Básico", "basico@sge.com", HashHelper.HashearPassword("1234"), false);
+            var prueba1 = new Usuario(prueba1Id, "Usuario Básico", "basico@sge.com", hashService.HashearPassword("1234"), false);
 
             var prueba2Id = Guid.Parse("33333333-3333-3333-3333-333333333333");
-            var prueba2 = new Usuario(prueba2Id, "Usuario Avanzado", "avanzado@sge.com", HashHelper.HashearPassword("1234"), false);
+            var prueba2 = new Usuario(prueba2Id, "Usuario Avanzado", "avanzado@sge.com", hashService.HashearPassword("1234"), false);
 
             modelBuilder.Entity<Usuario>().HasData(admin, prueba1, prueba2);
         }

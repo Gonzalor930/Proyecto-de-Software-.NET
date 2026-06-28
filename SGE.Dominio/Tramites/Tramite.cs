@@ -26,6 +26,7 @@ public class Tramite
 
         Invariantes();
     }
+    protected Tramite(){}
     public void ModificarContenido(ContenidoTramite nuevoContenido, Guid idUsuario)
     {
         if (nuevoContenido == null)
@@ -40,7 +41,6 @@ public class Tramite
 
     private void Invariantes()
     {
-        // Acá se asume que Guid vacío cuenta como inválido, al igual que los nulos
         if (id == Guid.Empty || ExpedienteId == Guid.Empty || UsuarioUltimoCambio == Guid.Empty)
         {
             throw new DominioException("Los identificadores del trámite no pueden estar vacíos.");

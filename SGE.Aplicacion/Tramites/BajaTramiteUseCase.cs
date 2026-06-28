@@ -1,7 +1,8 @@
 using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Expedientes;// Para poder usar el ActualizacionEstadoExpedienteService
 using SGE.Dominio.Tramites;
-using SGE.Aplicacion.Excepciones;//para usar las excepciones
+using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Autorizacion;//para usar las excepciones
 
 namespace SGE.Aplicacion.Tramites;
 
@@ -28,8 +29,7 @@ public class BajaTramiteUseCase(
         Guid idExpedienteAActualizar = tramite.ExpedienteId;
 
         // 4. Eliminamos (realizamos la baja)
-        tramiteRepositorio.Eliminar(request.TramiteId);
-
+        tramiteRepositorio.Eliminar(tramite);
         // 4. Usamos el ID que nos guardamos, para actualizar
         Service.ActualizarEstadoSiEsNecesario(idExpedienteAActualizar, request.IdUsuario);
         uow.Guardar();

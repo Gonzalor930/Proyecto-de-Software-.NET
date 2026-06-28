@@ -2,6 +2,7 @@ using SGE.Aplicacion.Autorizacion;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Autorizacion;
 
 namespace SGE.Aplicacion.Expedientes;
 public class ModificarCaratulaExpedienteUseCase

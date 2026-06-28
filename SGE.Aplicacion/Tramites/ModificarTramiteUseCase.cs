@@ -1,7 +1,8 @@
 using SGE.Aplicacion.Autorizacion;
-using SGE.Aplicacion.Expedientes;// Para poder usar el ActualizacionEstadoExpedienteService
+using SGE.Aplicacion.Expedientes;
 using SGE.Dominio.Tramites;
-using SGE.Aplicacion.Excepciones;//para usar las excepciones
+using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Autorizacion;
 
 namespace SGE.Aplicacion.Tramites;
 

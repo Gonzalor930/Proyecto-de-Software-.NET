@@ -1,6 +1,7 @@
 using SGE.Dominio.Usuarios;
-using SGE.Dominio.Comun; // Para DominioException
+using SGE.Dominio.Comun;
 using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Repositorios;
 
 namespace SGE.Aplicacion.GestionUsuarios;
 

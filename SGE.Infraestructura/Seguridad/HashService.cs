@@ -1,13 +1,14 @@
 using System.Security.Cryptography;
 using System.Text;
+using SGE.Aplicacion.Autorizacion;
 
 namespace SGE.Infraestructura.Seguridad
 {
-    public static class HashHelper
+    public class HashService: IHashService
     {
 
         // hash SHA-256 a partir de una cadena de texto
-        public static string HashearPassword(string password)
+        public string HashearPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("La contraseña no puede estar vacia", nameof(password));
