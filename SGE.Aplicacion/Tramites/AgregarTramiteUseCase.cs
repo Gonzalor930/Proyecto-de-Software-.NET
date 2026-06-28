@@ -14,7 +14,6 @@ public class AgregarTramiteUseCase(
 {
     public AgregarTramiteResponse Ejecutar(AgregarTramiteRequest request)
     {
-        // 1. Autorización
         if (!autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.TramiteAlta))
         {
             throw new AutorizacionException("No tiene permisos para dar de alta trámites.");
@@ -28,7 +27,6 @@ public class AgregarTramiteUseCase(
             request.IdUsuario);
         tramiteRepositorio.Agregar(nuevoTramite);
 
-        // 3.Aca usamos el service que esta en expediente
         Service.ActualizarEstadoSiEsNecesario(request.ExpedienteId, request.IdUsuario);
         uow.Guardar();
         return new AgregarTramiteResponse(nuevoTramite.id);

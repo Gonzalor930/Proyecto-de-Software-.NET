@@ -31,7 +31,7 @@ namespace SGE.Infraestructura.Persistencia
             {
                 entity.HasKey(u => u.Id);
 
-                entity.Property<List<Permiso>>("_permisos")  // accede al campo privado
+                entity.Property<List<Permiso>>("_permisos")
                     .HasColumnName("Permisos")
                     .HasConversion(
                         v => JsonSerializer.Serialize(v, JsonSerializerOptions.Default),
@@ -74,14 +74,20 @@ namespace SGE.Infraestructura.Persistencia
         private void SeedUsuarios(ModelBuilder modelBuilder)
         {
             var hashService = new HashService();
-            var adminId = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            var admin = new Usuario(adminId, "Administrador del Sistema", "admin@sge.com", hashService.HashearPassword("admin123"), true); 
             
+            var adminId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+            var admin = new Usuario(adminId, "Administrador del Sistema", "admin@sge.com", hashService.HashearPassword("admin123"), true);
+
             var prueba1Id = Guid.Parse("22222222-2222-2222-2222-222222222222");
             var prueba1 = new Usuario(prueba1Id, "Usuario Básico", "basico@sge.com", hashService.HashearPassword("1234"), false);
+            // Sin permisos — solo lectura
 
             var prueba2Id = Guid.Parse("33333333-3333-3333-3333-333333333333");
             var prueba2 = new Usuario(prueba2Id, "Usuario Avanzado", "avanzado@sge.com", hashService.HashearPassword("1234"), false);
+            prueba2.AsignarPermiso(Permiso.ExpedienteAlta);
+            prueba2.AsignarPermiso(Permiso.ExpedienteModificacion);
+            prueba2.AsignarPermiso(Permiso.TramiteAlta);
+            prueba2.AsignarPermiso(Permiso.TramiteModificacion);
 
             modelBuilder.Entity<Usuario>().HasData(admin, prueba1, prueba2);
         }
