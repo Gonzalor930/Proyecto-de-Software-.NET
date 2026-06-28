@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Routing;
 using System.Security.Claims;
 using SGE.Dominio.Autorizacion;
 using SGE.Aplicacion.GestionUsuarios;
-using SGE.Aplicacion.CasosDeUso; // SOLUCIONA EL ERROR 7
+using SGE.Aplicacion.CasosDeUso;
 using SGE.WebApi.Payloads;
 
 namespace SGE.WebApi.Endpoints
@@ -63,8 +63,6 @@ namespace SGE.WebApi.Endpoints
             grupo.MapPut("/{idUsuarioAModificar:guid}/permisos", (Guid idUsuarioAModificar, ModificarPermisosPayload payload, ClaimsPrincipal user, ModificarPermisosUsuarioUseCase useCase) =>
             {
                 var idEjecutor = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-                
-                // Tu UseCase recibe Guids y la lista, se los pasamos directo
                 useCase.Ejecutar(idEjecutor, idUsuarioAModificar, payload.PermisosDeseados);
                 
                 return Results.NoContent();

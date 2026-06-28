@@ -22,7 +22,6 @@ public class ObtenerExpedienteUseCase(
             exp.FechaUltimaModificacion,
             exp.Estado.ToString()
         );
-        //traemos todos los tramites asociados al expediente
         IEnumerable<Tramite> tramites = tramiteRepo.ObtenerPorExpedienteId(request.ExpedienteId);
         List<TramiteDTO> listaDtos = new List<TramiteDTO>();
         foreach (var tmt in tramites)

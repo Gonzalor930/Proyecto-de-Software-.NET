@@ -15,13 +15,11 @@ namespace SGE.WebApi.Middlewares
             Exception exception,
             CancellationToken cancellationToken)
         {
-            // Inicializamos el objeto ProblemDetails requerido por el TP
             var problemDetails = new ProblemDetails
             {
                 Instance = httpContext.Request.Path
             };
 
-            // Mapeo de excepciones a codigos HTTP 
             switch (exception)
             {
                 case DominioException dominioEx:
@@ -50,10 +48,7 @@ namespace SGE.WebApi.Middlewares
                     break;
             }
 
-            // Asigno el estado a la respuesta HTTP
             httpContext.Response.StatusCode = problemDetails.Status.Value;
-
-            // pasamos la respuesta a formato JSON
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
             return true;
         }

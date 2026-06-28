@@ -15,22 +15,16 @@ public class BajaTramiteUseCase(
 {
     public BajaTramiteResponse Ejecutar(BajaTramiteRequest request)
     {
-        // 1. Autorización
         if (!autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.TramiteBaja))
         {
-            throw new AutorizacionException("No tiene permisos para dar de baja trámites.");
+            throw new AutorizacionException("No tiene permisos para dar de baja tramites.");
         }
-        // 2. Buscamos el trámite
         Tramite? tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
-        if (tramite == null) throw new EntidadNoEncontradaException("El trámite no existe");
+        if (tramite == null) throw new EntidadNoEncontradaException("El tramite no existe");
 
-        // 2. Aca guardamos el id del exp para cuando vayamos a actualizar el estado, ya que si
-        //lo borramos y no guardamos el id no vamos a saber que expediente tenemos que actualizar
         Guid idExpedienteAActualizar = tramite.ExpedienteId;
 
-        // 4. Eliminamos (realizamos la baja)
         tramiteRepositorio.Eliminar(tramite);
-        // 4. Usamos el ID que nos guardamos, para actualizar
         Service.ActualizarEstadoSiEsNecesario(idExpedienteAActualizar, request.IdUsuario);
         uow.Guardar();
         return new BajaTramiteResponse(true); 

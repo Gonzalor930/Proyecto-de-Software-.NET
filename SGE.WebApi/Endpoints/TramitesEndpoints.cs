@@ -17,29 +17,24 @@ namespace SGE.WebApi.Endpoints
             grupo.MapGet("/expediente/{idExpediente:guid}", (Guid idExpediente, ListarTramitesPorExpedienteUseCase useCase) =>
             {
                 var request = new ListarTramitesPorExpedienteRequest(idExpediente);
-                // var response = useCase.Ejecutar(request);
-                return Results.Ok(/* response */);
+                return Results.Ok();
             }).RequireAuthorization();
 
-            // POST: Alta de Trámite
+            // POST: Alta de Tramite
             grupo.MapPost("/", (CrearTramitePayload payload, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>
             {
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
                 
                 var request = new AgregarTramiteRequest(userId, payload.ExpedienteId, payload.Contenido, payload.Etiqueta);
-                
-                // var response = useCase.Ejecutar(request);
                 return Results.Ok(); 
             }).RequireAuthorization();
 
-            // PUT: Modificar Trámite
+            // PUT: Modificar Tramite
             grupo.MapPut("/{id:guid}", (Guid id, ModificarTramitePayload payload, ClaimsPrincipal user, ModificarTramiteUseCase useCase) =>
             {
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
                 
                 var request = new ModificarTramiteRequest(userId, id, payload.NuevoContenido);
-                
-                // var response = useCase.Ejecutar(request);
                 return Results.NoContent();
             }).RequireAuthorization();
 
@@ -49,8 +44,6 @@ namespace SGE.WebApi.Endpoints
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
                 
                 var request = new BajaTramiteRequest(userId, id);
-                
-                // var response = useCase.Ejecutar(request);
                 return Results.NoContent();
             }).RequireAuthorization();
         }

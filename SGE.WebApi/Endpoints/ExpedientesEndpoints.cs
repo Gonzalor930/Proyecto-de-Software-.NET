@@ -34,12 +34,8 @@ namespace SGE.WebApi.Endpoints
             grupo.MapPost("/", (CrearExpedientePayload payload, ClaimsPrincipal user, AltaExpedienteUseCase useCase) =>
             {
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-                
-                // Ensambla el DTO en la capa de Aplicacion
                 var request = new AgregarExpedienteRequest(userId, payload.DetalleCaratula);
-                
-                // var response = useCase.Ejecutar(request);
-                return Results.Ok(); // Puede devolver el response.ExpedienteId aca
+                return Results.Ok();
             }).RequireAuthorization();
 
             // PUT: Modificar Caratula
@@ -47,8 +43,6 @@ namespace SGE.WebApi.Endpoints
             {
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
                 var request = new ModificarCaratulaExpedienteRequest(userId, id, payload.NuevaCaratula);
-                
-                // var response = useCase.Ejecutar(request);
                 return Results.NoContent();
             }).RequireAuthorization();
 
@@ -57,8 +51,6 @@ namespace SGE.WebApi.Endpoints
             {
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
                 var request = new CambiarEstadoExpedienteRequest(userId, id, payload.NuevoEstado);
-                
-                //var response = useCase.Ejecutar(request);
                 return Results.NoContent();
             }).RequireAuthorization();
 
@@ -67,8 +59,6 @@ namespace SGE.WebApi.Endpoints
             {
                 var userId = Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
                 var request = new BajaExpedienteRequest(userId, id);
-                
-                // var response = useCase.Ejecutar(request);
                 return Results.NoContent();
             }).RequireAuthorization();
         }

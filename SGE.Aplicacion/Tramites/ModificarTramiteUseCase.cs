@@ -15,24 +15,19 @@ public class ModificarTramiteUseCase(
 {
     public ModificarTramiteResponse Ejecutar(ModificarTramiteRequest request)
     {
-        // 1. Autorización
         if (!autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.TramiteModificacion))
         {
-            throw new AutorizacionException("No tiene permiso para modificar trámites");
+            throw new AutorizacionException("No tiene permiso para modificar tramites");
         }
 
-        // 2. Buscamos el trámite
         Tramite? tramite = tramiteRepositorio.ObtenerPorId(request.TramiteId);
-        if (tramite == null) throw new EntidadNoEncontradaException("El trámite es nulo");
+        if (tramite == null) throw new EntidadNoEncontradaException("El tramite es nulo");
 
-        // 3. Aca pedimos el nuevo contenido y vamos a modificarlo
         ContenidoTramite nuevoContenido = new ContenidoTramite(request.NuevoContenido);
         tramite.ModificarContenido(nuevoContenido, request.IdUsuario);
 
-        // 4. Aca lo modifica
         tramiteRepositorio.Modificar(tramite);
 
-        // 5. Usamos el service para actualizar
         Service.ActualizarEstadoSiEsNecesario(tramite.ExpedienteId, request.IdUsuario);
         uow.Guardar();
         return new ModificarTramiteResponse(true); 

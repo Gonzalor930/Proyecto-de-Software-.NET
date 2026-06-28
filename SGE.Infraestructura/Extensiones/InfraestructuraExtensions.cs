@@ -18,11 +18,9 @@ namespace SGE.Infraestructura.Extensiones
     {
         public static IServiceCollection AddInfraestructura(this IServiceCollection services, IConfiguration configuration)
         {
-            // La cadena de conexion "DefaultConnection" debe estar en el appsettings.json de la WebApi
             services.AddDbContext<SgeContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("SgeDatabase")));
 
-            // Registro de dependencias con ciclo de vida Scoped
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IExpedienteRepository, ExpedienteRepository>();
             services.AddScoped<ITramiteRepository, TramiteRepository>();
@@ -39,10 +37,8 @@ namespace SGE.Infraestructura.Extensiones
             using var scope = serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<SgeContext>();
 
-            // Crea la base de datos y aplica el seed si no existe
             if (context.Database.EnsureCreated())
             {
-                // Configuración de SQLite
                 var connection = context.Database.GetDbConnection();
                 connection.Open();
                 try

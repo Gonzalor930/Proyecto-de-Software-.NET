@@ -1,7 +1,7 @@
 using SGE.Dominio.Usuarios;
 using SGE.Dominio.Repositorios;
 using SGE.Aplicacion.Excepciones;
-using SGE.Aplicacion.Autorizacion; // Asegúrate de incluir el namespace donde pusiste tus interfaces
+using SGE.Aplicacion.Autorizacion;
 
 namespace SGE.Aplicacion.GestionUsuarios
 {
